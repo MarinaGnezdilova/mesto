@@ -20,9 +20,9 @@
 @import url(../blocks/profile/__button-icon-plus/profile__button-icon-plus.css);
 @import url(../blocks/profile/__button-icon-pen/profile__button-icon-pen.css);
 @import url(../blocks/profile/__edit-button/profile__edit-button.css);
-@import url(../blocks/elements/__icon/element__icon.css);
-@import url(../blocks/elements/__icon/__icon-status/element_icon-status-active.css);
-@import url(../blocks/elements/__icon/__icon-status/element_icon-status-disabled.css);
+@import url(../blocks/icon/icon.css);
+@import url(../blocks/icon/_icon-status/icon_status_active.css);
+@import url(../blocks/icon/_icon-status/icon_status_disabled.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup/__container/popup__container.css);
 @import url(../blocks/popup/__title/popup__title.css);

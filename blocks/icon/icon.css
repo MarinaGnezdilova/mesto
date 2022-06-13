@@ -1,4 +1,4 @@
-.element__icon {
+.icon {
     width: 22px;
     height: 19px;
     padding-bottom: 10px;
@@ -6,6 +6,6 @@
     transition: opacity .2s linear;
 }
 
-.element__icon:hover {
+.icon:hover {
     opacity: .6;
 }
