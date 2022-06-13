@@ -1,0 +1,19 @@
+.profile__form-name {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Arial', sans-serif;
+    font-weight: 500;
+    font-size: 42px;
+    line-height: 1.2;
+    background-color: #000000;
+    border: none;
+    width: 294px;
+    color: #FFFFFF;
+}
+
+@media screen and (max-width: 1023px) {
+    .profile__form-name {
+        font-size: 27px;
+        width: 186px;
+    }
+}

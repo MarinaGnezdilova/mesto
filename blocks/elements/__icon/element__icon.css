@@ -1,0 +1,11 @@
+.element__icon {
+    width: 22px;
+    height: 19px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    transition: opacity .2s linear;
+}
+
+.element__icon:hover {
+    opacity: .6;
+}

@@ -1,0 +1,11 @@
+.profile__form-name-and-button-edit {
+    margin-bottom: 8px;
+    margin-left: 30px;
+    display: flex;
+}
+
+@media screen and (max-width: 1023px) {
+    .profile__form-name-and-button-edit {
+        margin-left: 45px;
+    }
+}
