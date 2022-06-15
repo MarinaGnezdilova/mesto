@@ -1,13 +1,13 @@
 .elements_button-like_active {
-        width: 22px;
-        height: 19px;
-        border: none;
-        background-image: url(../../../images/icon-heart-fill.svg);
-        background-color: transparent;
-        transition: opacity .2s linear;
-        cursor: pointer;
-    }
+    min-width: 22px;
+    min-height: 19px;
+    border: none;
+    background-image: url(../../../images/icon-heart-fill.svg);
+    background-color: transparent;
+    transition: opacity .2s linear;
+    cursor: pointer;
+}
 
-    .elements_button-like_active:hover {
-        opacity: .5;
-    }
+.elements_button-like_active:hover {
+    opacity: .5;
+}

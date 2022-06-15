@@ -1,6 +1,6 @@
 .elements_button-like_disabled {
-    width: 22px;
-    height: 19px;
+    min-width: 22px;
+    min-height: 19px;
     border: none;
     background-image: url(../../../images/icon-heart-no-fill.svg);
     background-color: transparent;
