@@ -1,0 +1,13 @@
+.elements_button-like_disabled {
+    width: 22px;
+    height: 19px;
+    border: none;
+    background-image: url(../../../images/icon-heart-no-fill.svg);
+    background-color: transparent;
+    transition: opacity .2s linear;
+    cursor: pointer;
+}
+
+.elements_button-like_disabled:hover {
+    opacity: .5;
+}
