@@ -1,12 +1,12 @@
 .profile__edit-button {
     width: 24px;
     height: 24px;
-    background-color: #000000;
+    background-color: transparent;
     border: 1px solid #FFFFFF;
     transition: opacity .2s linear;
     align-self: center;
     margin-left: 15px;
-    margin-top: 5px;
+    cursor: pointer;
 }
 
 .profile__edit-button:hover {
@@ -15,9 +15,12 @@
 
 @media screen and (max-width: 1023px) {
     .profile__edit-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 18px;
         height: 18px;
         margin-left: 10px;
-        margin-top: 3px;
+        margin-bottom: 8px;
     }
 }

@@ -5,10 +5,14 @@
     font-weight: 500;
     font-size: 42px;
     line-height: 1.2;
-    background-color: #000000;
     border: none;
     width: 294px;
     color: #FFFFFF;
+    margin-left: 30px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 @media screen and (max-width: 1023px) {

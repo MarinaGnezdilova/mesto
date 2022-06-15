@@ -1,10 +1,10 @@
 .popup__form-field {
     width: 358px;
-    height: 27px;
     border: none;
-    margin-bottom: 22px;
-    border-bottom: 1px solid #F0F0F0;
-    padding-bottom: 5px;
+    margin-bottom: 23px;
+    border-bottom: 1px solid rgb(0, 0, 0, .2);
+    padding-bottom: 8px;
+    padding-top: 8px;
     font-family: 'Inter', 'Arial', sans-serif;
     font-weight: 400;
     font-size: 14px;
@@ -14,5 +14,6 @@
 @media screen and (max-width: 650px) {
     .popup__form-field {
         width: 238px;
+        margin-bottom: 26px;
     }
 }
