@@ -1,13 +1,14 @@
-.button-like_status_active {
+.button-like {
     min-width: 22px;
     min-height: 19px;
     border: none;
-    background-image: url(../../../images/icon-heart-fill.svg);
     background-color: transparent;
+    background-image: url(../../../images/icon-heart-no-fill.svg);
     transition: opacity .2s linear;
     cursor: pointer;
 }
 
-.button-like_status_active:hover {
+.button-like:hover {
     opacity: .5;
 }
+
