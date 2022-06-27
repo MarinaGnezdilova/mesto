@@ -26,9 +26,10 @@
                 </div>
                 <button class="profile__add-button" type="button"></button>
             </section>
-            <section class="elements">
-                <div class="elements__element">
+           <section class="elements">
+                <!--<div class="elements__element">
                     <img src="./images/karachaevsk.jpg" alt="Карачаевск" class="elements__photo">
+                    <img src="./images/delete-icon.svg" alt="Удаление" class="elements__delete-icon">
                     <div class="elements__element-footer">
                         <h2 class="elements__title">Карачаевск</h2>
                         <button class="button-like" type="button"></button>
@@ -68,7 +69,7 @@
                         <h2 class="elements__title">Карачаево-Черкесия</h2>
                         <button class="button-like" type="button"></button>
                     </div>
-                </div>
+                </div>-->
             </section>
         </main>
         <footer class="footer">
@@ -77,7 +78,7 @@
         <section class="popup">
             <div class="popup__container">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="popup__form" name="popup">
+                <form class="popup__form" name="popup-edit-profile">
                     <input type="text" class="popup__form-field popup__form-field-name" name="name">
                     <input type="text" class="popup__form-field popup__form-field-job" name="job">
                     <button class="popup__button" type="submit">Сохранить</button>
@@ -85,7 +86,35 @@
                 <button class="popup__button-close" type="button"></button>
             </div>
         </section>
+        <section class="popup popup_new-place">
+            <div class="popup__container">
+                <h2 class="popup__title">Новое место</h2>
+                <form class="popup__form popup_new-place__form" name="popup-add-place">
+                    <input type="text" class="popup__form-field popup_new-place__form-field-placename" name="place-name" placeholder="Название">
+                    <input type="text" class="popup__form-field popup_new-place__form-field-picture" name="picture" placeholder="Ссылка на картинку">
+                    <button class="popup__button popup_new-place__button" type="submit">Создать</button>
+                </form>
+                <button class="popup__button-close popup_new-place__button-close" type="button"></button>
+            </div>
+        </section>
+        <section class="popup popup-picture">
+            <div class="popup-picture__container">
+                <button class="popup-picture__button-close" type="button"></button>
+                <img src="./images/karachaevsk.jpg" alt="Изображение карточки" class="popup-picture__image">
+                <h2 class="popup-picture__title">Архыз</h2>
+            </div>
+        </section>
     </div>
+
+    <template id="element">
+        <div class="elements__element">
+            <img alt="Изображение места" class="elements__photo">
+            <img src="./images/delete-icon.svg" alt="Удаление" class="elements__delete-icon">
+            <div class="elements__element-footer">
+                <h2 class="elements__title"></h2>
+                <button class="button-like" type="button"></button>
+            </div>
+    </template>
     <script src="./scripts/script.js"></script>
 </body>
 

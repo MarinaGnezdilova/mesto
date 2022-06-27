@@ -3,7 +3,7 @@
     min-height: 19px;
     border: none;
     background-color: transparent;
-    background-image: url(../../../images/icon-heart-no-fill.svg);
+    background-image: url(../../images/icon-heart-no-fill.svg);
     transition: opacity .2s linear;
     cursor: pointer;
 }
