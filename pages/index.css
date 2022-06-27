@@ -35,10 +35,10 @@
 @import url(../blocks/popoup-picture/__title/popup-picture__title.css);
 @import url(../blocks/popoup-picture/__button-close/popup-picture__button-close.css);
 @import url(../blocks/popoup-picture/__container/popup-picture__container.css);
-@import url(../blocks/popup/_new-pace/popup_new-place.css);
+@import url(../blocks/new-place/new-place.css);
 @import url(../blocks/new-place-form/new-place-form.css);
-@import url(../blocks/popup/_new-pace/__form-field-placename/popup_new-place__form-field-placename.css);
-@import url(../blocks/popup/_new-pace/__form-field-picture/popup_new-place__form-field-picture.css);
-@import url(../blocks/popup/_new-pace/__button/popup_new-place__button.css);
-@import url(../blocks/popup/_new-pace/__button-close/popup_new-place__button-close.css);
+@import url(../blocks/new-place-form-field-placename/new-place-form-field-placename.css);
+@import url(../blocks/new-place-form-field-picture/new-place-form-field-picture.css);
+@import url(../blocks/new-place-button/new-place-button.css);
+@import url(../blocks/new-place-button-close/new-place-button-close.css);
 
