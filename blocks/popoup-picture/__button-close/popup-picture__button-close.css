@@ -5,6 +5,7 @@
     background-color: transparent;
     background-image: url(../../../images/сlose-icon.svg);
     background-size: cover;
+    display: flex;
     align-self: end;
     margin-bottom: 10px;
     transform: translateX(38px);

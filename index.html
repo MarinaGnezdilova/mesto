@@ -75,15 +75,15 @@
         <footer class="footer">
             <p class="footer__copyright"> &copy; 2022 Mesto Russia </p>
         </footer>
-        <section class="popup">
+        <section class="popup popup-profile">
             <div class="popup__container">
                 <h2 class="popup__title">Редактировать профиль</h2>
-                <form class="popup__form" name="popup-edit-profile">
+                <form class="popup__form popup-profile__form" name="popup-edit-profile">
                     <input type="text" class="popup__form-field popup__form-field-name" name="name">
                     <input type="text" class="popup__form-field popup__form-field-job" name="job">
                     <button class="popup__button" type="submit">Сохранить</button>
                 </form>
-                <button class="popup__button-close" type="button"></button>
+                <button class="popup__button-close popup-profile__button-close" type="button"></button>
             </div>
         </section>
         <section class="popup new-place">
@@ -101,7 +101,7 @@
         </section>
         <section class="popup popup-picture">
             <div class="popup-picture__container">
-                <button class="popup-picture__button-close" type="button"></button>
+                <button class="popup__button-close popup-picture__button-close" type="button"></button>
                 <img src="./images/karachaevsk.jpg" alt="Изображение карточки" class="popup-picture__image">
                 <h2 class="popup-picture__title">Архыз</h2>
             </div>
