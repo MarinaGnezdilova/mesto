@@ -22,6 +22,8 @@ const popupPicture = document.querySelector('.popup-picture');
 const buttonClosePopupPicture = document.querySelector('.popup-picture__button-close');
 const imagePopupPicture = document.querySelector('.popup-picture__image');
 const titlePopupTitle = document.querySelector('.popup-picture__title');
+const popupProfile = document.querySelector('.popup-profile');
+const popup = document.querySelector('.popup');
 const initialCards = [
     {
       name: 'Архыз',
@@ -53,18 +55,12 @@ const initialCards = [
   contentPopupFielJob.value = contentProfileJob.textContent;
   imagePopupPicture.src = fieldPicture.value;
 
-
-function openPopup(evt) {
-    if (evt.target.classList.contains('profile__add-button')) {
-      popupNewPlaceContent.classList.add('popup_opened');
-    }
-    else if (evt.target.classList.contains('profile__edit-button')) {
-      popupEditProfile.classList.add('popup_opened');
-    }
+function openPopup(popup) {
+  popup.classList.add('popup_opened');;
 }
-buttonEdit.addEventListener('click', openPopup);
-buttonAdd.addEventListener('click', openPopup);
 
+buttonEdit.addEventListener('click', function(evt) {openPopup(popupEditProfile)});
+buttonAdd.addEventListener('click', function(evt) {openPopup(popupNewPlaceContent)});
 
 function hideClosestPopup(evt) {
   const closestPopup = evt.target.closest('.popup');
@@ -99,7 +95,7 @@ function createCard(item) {
 });
   const imageCard = cardElement.querySelector('.elements__photo');
   imageCard.addEventListener('click', function(evt) {
-  popupPicture.classList.add('popup_opened');
+  openPopup(popupPicture);
   imagePopupPicture.src = item.link;
   imagePopupPicture.alt = item.name;
   titlePopupTitle.textContent = item.name;
