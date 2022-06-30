@@ -78,7 +78,7 @@ function handleProfileFormSubmit(evt) {
     profileFormName.textContent = nameInput.value;
     profileFormJob.textContent = jobInput.value;
     const closeElement = evt.target;
-    closeElement.closest('.popup').classList.remove('popup_opened');
+    closePopup(closeElement.closest('.popup'));
 }
 popupFormEditProfile.addEventListener('submit', handleProfileFormSubmit);
 
@@ -112,7 +112,8 @@ function handleNewPlaceFormSubmit(evt) {
   const newElement = createCard(formAdd);
   blockElements.prepend(newElement);
   const closeElement = evt.target;
-  closeElement.closest('.popup').classList.remove('popup_opened');
+ /* closeElement.closest('.popup').classList.remove('popup_opened');*/
+  closePopup(closeElement.closest('.popup'));
   fieldPlaceName.value = '';
   fieldPicture.value = '';
 }
