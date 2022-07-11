@@ -42,4 +42,8 @@
 @import url(../blocks/new-place-button/new-place-button.css);
 @import url(../blocks/new-place-button-close/new-place-button-close.css);
 @import url(../blocks/popup-profie/__button-close/popup-profile__button-close.css);
-
+@import url(../blocks/popup/__form-field-error/popup__form-field-error.css);
+@import url(../blocks/popup/__form-field-text-error/popup__form-field-text-error.css);
+@import url(../blocks/popup/__button/popup__button_valid.css);
+@import url(../blocks/popup/__button/popup__button_invalid.css);
+@import url(../blocks/error/error.css);
