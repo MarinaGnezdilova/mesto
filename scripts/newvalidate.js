@@ -1,50 +1,69 @@
 function enableValidation (setting) {
     const forms = Array.from(document.querySelectorAll(setting.formSelector));
     forms.forEach(function(elem) {
-        setEventListeners(elem, setting)
+        setEventListeners(elem, setting);
+        validateForm(elem, setting);
     });
 
 
     function setEventListeners(elem) {
     elem.addEventListener('input', function(evt){
-        console.log('Клик по форме');
         handlerInputForm(evt);
     });
     elem.addEventListener('submit', function(evt){
-        console.log('Отправка формы');
     });
    };
 
    function handlerInputForm(evt) {
     const currentForm = evt.currentTarget;
-    console.log(currentForm);
-    /*validateInput(evt.target);*/
+    validateInput(evt.target);
     validateForm(currentForm, setting);
-    console.log('вызов handlerInputForm');
     };
 
     function validateForm(form, setting) {
         const submitButton = form.querySelector(setting.submitButtonSelector);
-        console.log(submitButton);
         if(form.checkValidity()) {
         submitButton.removeAttribute('disabled', true);
         submitButton.classList.add('popup__button_valid');
         submitButton.classList.remove('popup__button_invalid');
-        console.log('вызов validateForm');
         } else {
             submitButton.setAttribute('disabled', true);
             submitButton.classList.remove('popup__button_valid');
             submitButton.classList.add('popup__button_invalid');
-            console.log('вызов validateForm');
-           /* console.log(submitButton.classList);*/
         }
     };
-console.log('Вызов enableValidation');
-}
+
+    function validateInput(input) {
+        addCustomErrorMessage(input);
+        const errorElement = input.parentNode.querySelector(`#${input.id}-error`);
+        errorElement.textContent = input.validationMessage;
+    }
+    function addCustomErrorMessage(input) {
+        input.setCustomValidity('');
+        if(input.validity.valueMissing) {
+            input.setCustomValidity('Вы пропустили это поле');
+        }
+        if(input.validity.tooShort) {
+            input.setCustomValidity('Минимальное количество символов:2. Длина текста сейчас 1 символ');
+        }
+        if(input.validity.typeMismatch && input.type === 'url') {
+            input.setCustomValidity('Введите адрес сайта');
+        }
+    }
+
+    const inputs =  Array.from(document.querySelectorAll(setting.inputSelector));
+    console.log(inputs);
+    inputs.forEach(function(item){
+        item.addEventListener('keydown', function(evt) {
+            console.log(evt);
+       })
+    })
+
+};
 
 enableValidation({
     formSelector: '.popup__form',
-    inputSelector: '.popup__input',
+    inputSelector: '.popup__form-field',
     submitButtonSelector: '.popup__button',
     inactiveButtonClass: 'popup__button_disabled',
     inputErrorClass: 'popup__input_type_error',

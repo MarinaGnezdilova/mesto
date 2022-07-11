@@ -56,12 +56,14 @@ const initialCards = [
   imagePopupPicture.src = fieldPicture.value;
 
 function openPopup(popup) {
+  console.log(popup);
   popup.classList.add('popup_opened');
+  }
   const inputEvent = new Event('input');
   const inputForm = popup.querySelector('.popup__form-field');
-  /*console.log(inputForm);*/
+  console.log(inputForm);
   inputForm.dispatchEvent(inputEvent);
-}
+
 
 buttonEdit.addEventListener('click', function(evt) {openPopup(popupEditProfile)});
 buttonAdd.addEventListener('click', function(evt) {openPopup(popupNewPlaceContent)});
@@ -132,15 +134,17 @@ initialCards.forEach(function (item) {
 
 const containers = document.querySelectorAll('.popup__container');
 const popups = document.querySelectorAll('.popup');
-console.log(containers);
 
-
-
-/*popup.addEventListener('click', function(evt){
+popups.forEach(function(item) {
+  item.addEventListener('click', function(evt){
   if(evt.target === evt.currentTarget) {
-    closePopup(evt.closest('.popup'))
+    closePopup(evt.target);
   }
 })
+});
+
+
+
 /*containers.forEach(function(item) {
   item.addEventListener('click', function(evt) {
     evt.preventDefault();
