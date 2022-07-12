@@ -8,34 +8,35 @@ function enableValidation (setting) {
 
     function setEventListeners(elem) {
     elem.addEventListener('input', function(evt){
-        handlerInputForm(evt);
+        handlerInputForm(evt,setting);
     });
     elem.addEventListener('submit', function(evt){
     });
    };
 
-   function handlerInputForm(evt) {
+   function handlerInputForm(evt,setting) {
     const currentForm = evt.currentTarget;
-    validateInput(evt.target);
+    validateInput(evt.target, setting);
     validateForm(currentForm, setting);
     };
 
-    function validateForm(form, setting) {
+    function validateForm(form,setting) {
         const submitButton = form.querySelector(setting.submitButtonSelector);
         if(form.checkValidity()) {
         submitButton.removeAttribute('disabled', true);
-        submitButton.classList.add('popup__button_valid');
-        submitButton.classList.remove('popup__button_invalid');
+        submitButton.classList.remove(setting.inactiveButtonClass);
         } else {
             submitButton.setAttribute('disabled', true);
-            submitButton.classList.remove('popup__button_valid');
-            submitButton.classList.add('popup__button_invalid');
+            submitButton.classList.add(setting.inactiveButtonClass);
         }
     };
 
-    function validateInput(input) {
+    function validateInput(input,setting) {
         addCustomErrorMessage(input);
-        const errorElement = input.parentNode.querySelector(`#${input.id}-error`);
+        const errorElement = input.nextElementSibling;
+        /*const errorElement = input.parentNode.querySelector(`#${input.id}-error`);*/
+        console.log(errorElement);
+        errorElement.classList.add(setting.errorClass);
         errorElement.textContent = input.validationMessage;
     }
     function addCustomErrorMessage(input) {
@@ -52,10 +53,12 @@ function enableValidation (setting) {
     }
 
     const inputs =  Array.from(document.querySelectorAll(setting.inputSelector));
-    console.log(inputs);
     inputs.forEach(function(item){
         item.addEventListener('keydown', function(evt) {
-            console.log(evt);
+                if(evt.key === 'Escape') {
+                    console.log(evt.key);
+                    hideClosestPopup(evt);
+                }
        })
     })
 
@@ -65,8 +68,8 @@ enableValidation({
     formSelector: '.popup__form',
     inputSelector: '.popup__form-field',
     submitButtonSelector: '.popup__button',
-    inactiveButtonClass: 'popup__button_disabled',
-    inputErrorClass: 'popup__input_type_error',
-    errorClass: 'popup__error_visible'
+    inactiveButtonClass: 'popup__button_invalid',
+    inputErrorClass: 'error',
+    errorClass: 'error_visible'
   });
 

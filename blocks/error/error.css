@@ -10,6 +10,7 @@
     line-height: 1.2;
     margin-bottom: 5px;
     margin-top: 5px;
+    visibility: hidden;
 }
 
 @media screen and (max-width: 650px) {

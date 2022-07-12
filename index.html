@@ -80,9 +80,9 @@
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form class="popup__form popup-profile__form" name="popup-edit-profile"  novalidate>
                     <input type="text" id="profile-name" class="popup__form-field popup__form-field-name" name="name"  minlength="2" maxlength="40" required>
-                    <span class="error" id="profile-name-error"></span>
+                    <span class="error" id="profile-name-error">Ошибка</span>
                     <input type="text" id="job" class="popup__form-field popup__form-field-job" name="job" minlength="2" maxlength="200" required>
-                    <span class="error" id="job-error"></span>
+                    <span class="error" id="job-error">Ошибка</span>
                     <button class="popup__button" type="submit">Сохранить</button>
                 </form>
                 <button class="popup__button-close popup-profile__button-close" type="button"></button>
@@ -94,10 +94,10 @@
                 <form class="popup__form new-place-form" name="popup-add-place" novalidate>
                     <input type="text" id="name-card" class="popup__form-field new-place-form-field-placename" name="place-name"
                         placeholder="Название"  minlength="2" maxlength="30" required>
-                        <span class="error" id="name-card-error"></span>
+                        <span class="error" id="name-card-error">Ошибка</span>
                     <input type="url" id="link" class="popup__form-field new-place-form-field-picture" name="picture"
                         placeholder="Ссылка на картинку" required>
-                        <span class="error" id="link-error"></span>
+                        <span class="error" id="link-error">Ошибка</span>
                     <button class="popup__button new-place-button" type="submit">Создать</button>
                 </form>
                 <button class="popup__button-close new-place-button-close" type="button"></button>

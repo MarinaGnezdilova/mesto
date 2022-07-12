@@ -56,13 +56,11 @@ const initialCards = [
   imagePopupPicture.src = fieldPicture.value;
 
 function openPopup(popup) {
-  console.log(popup);
   popup.classList.add('popup_opened');
-  }
   const inputEvent = new Event('input');
   const inputForm = popup.querySelector('.popup__form-field');
   console.log(inputForm);
-  inputForm.dispatchEvent(inputEvent);
+inputForm.dispatchEvent(inputEvent);}
 
 
 buttonEdit.addEventListener('click', function(evt) {openPopup(popupEditProfile)});
