@@ -24,6 +24,8 @@ const imagePopupPicture = document.querySelector('.popup-picture__image');
 const titlePopupTitle = document.querySelector('.popup-picture__title');
 const popupProfile = document.querySelector('.popup-profile');
 const popup = document.querySelector('.popup');
+const containers = document.querySelectorAll('.popup__container');
+const popups = document.querySelectorAll('.popup');
 const initialCards = [
     {
       name: 'Архыз',
@@ -57,10 +59,13 @@ const initialCards = [
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
-  const inputEvent = new Event('input');
+  const buttonAddPopup = formAddPlace.querySelector('.popup__button');
+  buttonAddPopup.classList.add('popup__button_invalid');
+  buttonAddPopup.setAttribute('disabled', true);
+  /*const inputEvent = new Event('input');
   const inputForm = popup.querySelector('.popup__form-field');
   console.log(inputForm);
-inputForm.dispatchEvent(inputEvent);}
+inputForm.dispatchEvent(inputEvent);*/}
 
 
 buttonEdit.addEventListener('click', function(evt) {openPopup(popupEditProfile)});
@@ -128,11 +133,6 @@ initialCards.forEach(function (item) {
   blockElements.append(newElement);
 })
 
-
-
-const containers = document.querySelectorAll('.popup__container');
-const popups = document.querySelectorAll('.popup');
-
 popups.forEach(function(item) {
   item.addEventListener('click', function(evt){
   if(evt.target === evt.currentTarget) {
@@ -141,7 +141,13 @@ popups.forEach(function(item) {
 })
 });
 
-
+document.body.addEventListener('keyup', function(evt) {
+  const key = evt.key;
+  const openedPopup = document.querySelector('.popup_opened');
+  if(evt.key === 'Escape') {
+      closePopup(openedPopup);
+  }
+})
 
 /*containers.forEach(function(item) {
   item.addEventListener('click', function(evt) {
