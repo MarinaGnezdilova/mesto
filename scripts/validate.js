@@ -42,6 +42,11 @@ function hideInputError(input, errorElement, setting) {
   errorElement.textContent = "";
 }
 
+function hideInputErrorFirstOpen (input,setting) {
+    const errorElement = input.closest(".popup__input-block").querySelector(`#${input.id}-error`);
+    hideInputError(input, errorElement, setting);
+}
+
 function toggleButtonState(form, setting) {
   const submitButton = form.querySelector(setting.submitButtonSelector);
   if (form.checkValidity()) {

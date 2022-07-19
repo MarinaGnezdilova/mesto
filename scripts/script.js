@@ -31,6 +31,8 @@ const titlePopupTitle = document.querySelector(".popup-picture__title");
 const popupProfile = document.querySelector(".popup-profile");
 const containers = document.querySelectorAll(".popup__container");
 const popups = document.querySelectorAll(".popup");
+const inputsFormProfile = popupFormEditProfile.querySelectorAll(".popup__form-field");
+const inputsFormNewPlace = formAddPlace.querySelectorAll(".popup__form-field");
 const initialCards = [
   {
     name: "Архыз",
@@ -70,48 +72,35 @@ function openPopup(popup) {
   document.addEventListener("keydown", closePopupOnEsc);
 }
 
-buttonEdit.addEventListener("click", function (evt) {
-  openPropfilePopup(popupEditProfile);
-});
-buttonAdd.addEventListener("click", function (evt) {
-  openNewPlacePopup(popupNewPlaceContent);
-});
-
-function openPropfilePopup(popup) {
+function openPropfilePopup() {
   contentPopupFieldName.value = contentProfileName.textContent;
   contentPopupFielJob.value = contentProfileJob.textContent;
-  openPopup(popup);
-  const inputs = popup.querySelectorAll(".popup__form-field");
-  inputs.forEach(function (input) {
-    const errorElement = input.closest(".popup__input-block").querySelector(`#${input.id}-error`);
-    hideInputError(input, errorElement, setting);
+  openPopup(popupProfile);
+  inputsFormProfile.forEach(function (input) {
+    hideInputErrorFirstOpen(input,setting);
   });
-  disableSubmitButton(popup,setting);
+  disableSubmitButton(popupProfile,setting);
 }
 
-function openNewPlacePopup(popup) {
+function openNewPlacePopup() {
   fieldPlaceName.value = "";
   fieldPicture.value = "";
-  openPopup(popup);
-  const inputs = popup.querySelectorAll(".popup__form-field");
-  inputs.forEach(function (input) {
-    const errorElement = input.closest(".popup__input-block").querySelector(`#${input.id}-error`);
-    hideInputError(input, errorElement, setting);
-    disableSubmitButton(popup,setting);
+  openPopup(popupNewPlaceContent);
+  inputsFormNewPlace.forEach(function (input) {
+    hideInputErrorFirstOpen(input,setting);
   });
+  disableSubmitButton(popupNewPlaceContent,setting);
 }
 
 function hideClosestPopup(evt) {
   const closestPopup = evt.target.closest(".popup");
   closePopup(closestPopup);
 }
+
 function closePopup(closestPopup) {
   closestPopup.classList.remove("popup_opened");
   document.removeEventListener("keydown", closePopupOnEsc);
 }
-buttonClosePopupProfile.addEventListener("click", hideClosestPopup);
-buttonClosePopupPicture.addEventListener("click", hideClosestPopup);
-buttonClosePopupNewPlace.addEventListener("click", hideClosestPopup);
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
@@ -119,7 +108,6 @@ function handleProfileFormSubmit(evt) {
   profileFormJob.textContent = jobInput.value;
   closePopup(popupProfile);
 }
-popupFormEditProfile.addEventListener("submit", handleProfileFormSubmit);
 
 function createCard(item) {
   const cardElement = elementTemplate.querySelector(".elements__element").cloneNode(true);
@@ -154,6 +142,24 @@ function handleNewPlaceFormSubmit(evt) {
   fieldPlaceName.value = "";
   fieldPicture.value = "";
 }
+
+function closePopupOnEsc(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_opened");
+    closePopup(openedPopup);
+  }
+}
+
+buttonClosePopupProfile.addEventListener("click", hideClosestPopup);
+buttonClosePopupPicture.addEventListener("click", hideClosestPopup);
+buttonClosePopupNewPlace.addEventListener("click", hideClosestPopup);
+buttonEdit.addEventListener("click", function (evt) {
+  openPropfilePopup(popupEditProfile);
+});
+buttonAdd.addEventListener("click", function (evt) {
+  openNewPlacePopup(popupNewPlaceContent);
+});
+popupFormEditProfile.addEventListener("submit", handleProfileFormSubmit);
 formAddPlace.addEventListener("submit", handleNewPlaceFormSubmit);
 
 initialCards.forEach(function (item) {
@@ -169,9 +175,3 @@ popups.forEach(function (popup) {
   });
 });
 
-function closePopupOnEsc(evt) {
-  if (evt.key === "Escape") {
-    const openedPopup = document.querySelector(".popup_opened");
-    closePopup(openedPopup);
-  }
-}
