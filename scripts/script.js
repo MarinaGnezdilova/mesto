@@ -88,7 +88,7 @@ function openNewPlacePopup() {
   fieldPlaceName.value = "";
   fieldPicture.value = "";
   openPopup(popupNewPlaceContent);
-  validationNewPlace._toggleButtonState();
+  validationNewPlace.toggleButtonState();
   inputsFormNewPlace.forEach(function (input) {
     validationNewPlace.hideInputErrorFirstOpen(input);
   });

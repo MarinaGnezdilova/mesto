@@ -23,7 +23,7 @@ export class FormValidator {
 
   _handlerInputForm(input) {
     this._validateInput(input);
-    this._toggleButtonState();
+    this.toggleButtonState();
   }
 
   _validateInput(input) {
@@ -69,7 +69,7 @@ export class FormValidator {
     this._setEventListeners();
   }
 
-  _toggleButtonState() {
+  toggleButtonState() {
     const form = document.querySelector(this._formClass);
     const submitButton = form.querySelector(this._submitButtonSelector);
     if (form.checkValidity()) {
