@@ -1,3 +1,5 @@
+import { Card } from "./Сard.js";
+import { FormValidator } from "./FormValidator.js";
 const buttonEdit = document.querySelector(".profile__edit-button");
 const buttonClosePopupProfile = document.querySelector(".popup__button-close");
 const contentProfileName = document.querySelector(".profile__form-name");
@@ -9,7 +11,6 @@ const nameInput = document.querySelector(".popup__form-field-name");
 const jobInput = document.querySelector(".popup__form-field-job");
 const profileFormName = document.querySelector(".profile__form-name");
 const profileFormJob = document.querySelector(".profile__form-profession");
-const elementTemplate = document.querySelector("#element").content;
 const blockElements = document.querySelector(".elements");
 const popupNewPlaceContent = document.querySelector(".new-place");
 const popupEditProfile = document.querySelector(".popup-profile");
@@ -22,17 +23,16 @@ const fieldPlaceName = document.querySelector(
 );
 const fieldPicture = document.querySelector(".new-place-form-field-picture");
 const formAddPlace = document.querySelector(".new-place-form");
-const popupPicture = document.querySelector(".popup-picture");
 const buttonClosePopupPicture = document.querySelector(
   ".popup-picture__button-close"
 );
-const imagePopupPicture = document.querySelector(".popup-picture__image");
-const titlePopupTitle = document.querySelector(".popup-picture__title");
 const popupProfile = document.querySelector(".popup-profile");
-const containers = document.querySelectorAll(".popup__container");
 const popups = document.querySelectorAll(".popup");
-const inputsFormProfile = popupFormEditProfile.querySelectorAll(".popup__form-field");
-const inputsFormNewPlace = formAddPlace.querySelectorAll(".popup__form-field");
+const inputsFormProfile =
+  popupFormEditProfile.querySelectorAll(".popup__form-field");
+const inputsFormNewPlace = Array.from(
+  formAddPlace.querySelectorAll(".popup__form-field")
+);
 const initialCards = [
   {
     name: "Архыз",
@@ -66,8 +66,10 @@ const setting = {
   errorClass: "error_visible",
   inputErrorClass: "popup__form-field_error",
 };
+const validationNewPlace = new FormValidator(setting, ".new-place-form");
+const validationProfile = new FormValidator(setting, ".popup-profile__form");
 
-function openPopup(popup) {
+export function openPopup(popup) {
   popup.classList.add("popup_opened");
   document.addEventListener("keydown", closePopupOnEsc);
 }
@@ -76,20 +78,20 @@ function openPropfilePopup() {
   contentPopupFieldName.value = contentProfileName.textContent;
   contentPopupFielJob.value = contentProfileJob.textContent;
   openPopup(popupProfile);
+  validationProfile.ableSubmitButton();
   inputsFormProfile.forEach(function (input) {
-    hideInputErrorFirstOpen(input,setting);
+    validationProfile.hideInputErrorFirstOpen(input);
   });
-  disableSubmitButton(popupProfile,setting);
 }
 
 function openNewPlacePopup() {
   fieldPlaceName.value = "";
   fieldPicture.value = "";
   openPopup(popupNewPlaceContent);
+  validationNewPlace._toggleButtonState();
   inputsFormNewPlace.forEach(function (input) {
-    hideInputErrorFirstOpen(input,setting);
+    validationNewPlace.hideInputErrorFirstOpen(input);
   });
-  disableSubmitButton(popupNewPlaceContent,setting);
 }
 
 function hideClosestPopup(evt) {
@@ -109,35 +111,12 @@ function handleProfileFormSubmit(evt) {
   closePopup(popupProfile);
 }
 
-function createCard(item) {
-  const cardElement = elementTemplate.querySelector(".elements__element").cloneNode(true);
-  cardElement.querySelector(".button-like").addEventListener("click", function (evt) {
-      const targetClick = evt.target;
-      targetClick.classList.toggle("button-like_status_active");
-    });
-  cardElement
-    .querySelector(".elements__delete-icon")
-    .addEventListener("click", function (evt) {
-      cardElement.remove();
-    });
-  const imageCard = cardElement.querySelector(".elements__photo");
-  imageCard.addEventListener("click", function (evt) {
-    openPopup(popupPicture);
-    imagePopupPicture.src = item.link;
-    imagePopupPicture.alt = item.name;
-    titlePopupTitle.textContent = item.name;
-  });
-  cardElement.querySelector(".elements__title").textContent = item.name;
-  imageCard.src = item.link;
-  imageCard.alt = item.name;
-  return cardElement;
-}
-
 function handleNewPlaceFormSubmit(evt) {
   evt.preventDefault();
   const formAdd = { name: fieldPlaceName.value, link: fieldPicture.value };
-  const newElement = createCard(formAdd);
-  blockElements.prepend(newElement);
+  const newElement = new Card(formAdd, ".element-template");
+  const cardElement = newElement.generateCard();
+  blockElements.prepend(cardElement);
   closePopup(popupNewPlaceContent);
   fieldPlaceName.value = "";
   fieldPicture.value = "";
@@ -150,6 +129,8 @@ function closePopupOnEsc(evt) {
   }
 }
 
+validationNewPlace.enableValidation();
+validationProfile.enableValidation();
 buttonClosePopupProfile.addEventListener("click", hideClosestPopup);
 buttonClosePopupPicture.addEventListener("click", hideClosestPopup);
 buttonClosePopupNewPlace.addEventListener("click", hideClosestPopup);
@@ -162,11 +143,6 @@ buttonAdd.addEventListener("click", function (evt) {
 popupFormEditProfile.addEventListener("submit", handleProfileFormSubmit);
 formAddPlace.addEventListener("submit", handleNewPlaceFormSubmit);
 
-initialCards.forEach(function (item) {
-  const newElement = createCard(item);
-  blockElements.append(newElement);
-});
-
 popups.forEach(function (popup) {
   popup.addEventListener("click", function (evt) {
     if (evt.target === evt.currentTarget) {
@@ -175,3 +151,8 @@ popups.forEach(function (popup) {
   });
 });
 
+initialCards.forEach((item) => {
+  const card = new Card(item, ".element-template");
+  const cardElement = card.generateCard();
+  blockElements.append(cardElement);
+});
