@@ -62,12 +62,13 @@ const initialCards = [
 const setting = {
   formSelector: ".popup__form",
   submitButtonSelector: ".popup__button",
+  inputSelector: ".popup__form-field",
   inactiveButtonClass: "popup__button_invalid",
   errorClass: "error_visible",
   inputErrorClass: "popup__form-field_error",
 };
-const validationNewPlace = new FormValidator(setting, ".new-place-form");
-const validationProfile = new FormValidator(setting, ".popup-profile__form");
+const validationNewPlace = new FormValidator(setting, formAddPlace);
+const validationProfile = new FormValidator(setting, popupFormEditProfile);
 
 export function openPopup(popup) {
   popup.classList.add("popup_opened");
@@ -78,7 +79,7 @@ function openPropfilePopup() {
   contentPopupFieldName.value = contentProfileName.textContent;
   contentPopupFielJob.value = contentProfileJob.textContent;
   openPopup(popupProfile);
-  validationProfile.ableSubmitButton();
+  validationProfile.enableSubmitButton();
   inputsFormProfile.forEach(function (input) {
     validationProfile.hideInputErrorFirstOpen(input);
   });
@@ -129,16 +130,26 @@ function closePopupOnEsc(evt) {
   }
 }
 
+function createCard(item) {
+  const card = new Card(item, ".element-template");
+  const cardElement = card.generateCard();
+  return cardElement;
+}
+
 validationNewPlace.enableValidation();
 validationProfile.enableValidation();
-buttonClosePopupProfile.addEventListener("click", hideClosestPopup);
+buttonClosePopupProfile.addEventListener("click", () => {
+  closePopup(popupEditProfile);
+});
 buttonClosePopupPicture.addEventListener("click", hideClosestPopup);
-buttonClosePopupNewPlace.addEventListener("click", hideClosestPopup);
+buttonClosePopupNewPlace.addEventListener("click", () => {
+  closePopup(popupNewPlaceContent);
+});
 buttonEdit.addEventListener("click", function (evt) {
-  openPropfilePopup(popupEditProfile);
+  openPropfilePopup();
 });
 buttonAdd.addEventListener("click", function (evt) {
-  openNewPlacePopup(popupNewPlaceContent);
+  openNewPlacePopup();
 });
 popupFormEditProfile.addEventListener("submit", handleProfileFormSubmit);
 formAddPlace.addEventListener("submit", handleNewPlaceFormSubmit);
@@ -152,7 +163,5 @@ popups.forEach(function (popup) {
 });
 
 initialCards.forEach((item) => {
-  const card = new Card(item, ".element-template");
-  const cardElement = card.generateCard();
-  blockElements.append(cardElement);
+  blockElements.append(createCard(item));
 });

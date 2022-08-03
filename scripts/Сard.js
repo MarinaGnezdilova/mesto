@@ -24,31 +24,32 @@ export class Card {
   }
 
   _handleButtonLikeClick() {
-    this._card
-      .querySelector(".button-like")
-      .classList.toggle("button-like_status_active");
+    this._likeButton.classList.toggle("button-like_status_active");
   }
 
   _setEventListeners() {
-    this._card.querySelector(".button-like").addEventListener("click", () => {
+    const popupPicture = document.querySelector(".popup-picture");
+    const titlePopupTitle = document.querySelector(".popup-picture__title");
+    const imagePopupPicture = document.querySelector(".popup-picture__image");
+    const callHandleButtonLikeClick = () => {
       this._handleButtonLikeClick();
-    });
-    this._card
-      .querySelector(".elements__delete-icon")
-      .addEventListener("click", () => {
-        this._card.remove();
-      });
-    this._card
-      .querySelector(".elements__photo")
-      .addEventListener("click", () => {
-        const popupPicture = document.querySelector(".popup-picture");
-        openPopup(popupPicture);
-        const imagePopupPicture = document.querySelector(
-          ".popup-picture__image"
-        );
-        imagePopupPicture.src = this._image;
-        const titlePopupTitle = document.querySelector(".popup-picture__title");
-        titlePopupTitle.textContent = this._name;
-      });
+    };
+    const callRemoveCard = () => {
+      this._card.remove();
+    };
+    const openPopupImage = () => {
+      openPopup(popupPicture);
+      imagePopupPicture.src = this._image;
+      imagePopupPicture.alt = this._name;
+      titlePopupTitle.textContent = this._name;
+    };
+
+    this._likeButton = this._card.querySelector(".button-like");
+    this._iconDelete = this._card.querySelector(".elements__delete-icon");
+    this._imageCard = this._card.querySelector(".elements__photo");
+
+    this._likeButton.addEventListener("click", callHandleButtonLikeClick);
+    this._iconDelete.addEventListener("click", callRemoveCard);
+    this._imageCard.addEventListener("click", openPopupImage);
   }
 }

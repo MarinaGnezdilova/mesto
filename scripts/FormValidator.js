@@ -1,33 +1,32 @@
 export class FormValidator {
-  constructor(setting, formClass) {
+  constructor(setting, form) {
     this._formSelector = setting.formSelector;
     this._submitButtonSelector = setting.submitButtonSelector;
     this._inactiveButtonClass = setting.inactiveButtonClass;
     this._errorClass = setting.errorClass;
     this._inputErrorClass = setting.inputErrorClass;
-    this._formClass = formClass;
+    this._inputSelector = setting.inputSelector;
+    this._form = form;
+    this._submitButton = form.querySelector(setting.submitButtonSelector);
   }
 
   _setEventListeners() {
-    const inputs = Array.from(
-      document
-        .querySelector(this._formClass)
-        .querySelectorAll(".popup__form-field")
-    );
+    const inputs = Array.from(this._form.querySelectorAll(this._inputSelector));
+    const callValidareForm = (input) => {
+      this._validateForm(input);
+    };
     inputs.forEach((input) => {
-      input.addEventListener("input", (input) => {
-        this._handlerInputForm(input);
-      });
+      input.addEventListener("input", callValidareForm);
     });
   }
 
-  _handlerInputForm(input) {
+  _validateForm(input) {
     this._validateInput(input);
     this.toggleButtonState();
   }
 
   _validateInput(input) {
-    this._addCustomErrorMessage(input);
+    /*this._addCustomErrorMessage(input);*/
     const errorElement = input.target
       .closest(".popup__input-block")
       .querySelector(`#${input.target.id}-error`);
@@ -38,7 +37,7 @@ export class FormValidator {
     }
   }
 
-  _addCustomErrorMessage(input) {
+  /*_addCustomErrorMessage(input) {
     input.target.setCustomValidity("");
     if (input.target.validity.valueMissing) {
       input.target.setCustomValidity("Вы пропустили это поле");
@@ -51,7 +50,7 @@ export class FormValidator {
     if (input.target.validity.typeMismatch && input.target.type === "url") {
       input.target.setCustomValidity("Введите адрес сайта");
     }
-  }
+  }*/
 
   _showInputError(input, errorElement) {
     input.target.classList.add(this._inputErrorClass);
@@ -70,21 +69,16 @@ export class FormValidator {
   }
 
   toggleButtonState() {
-    const form = document.querySelector(this._formClass);
-    const submitButton = form.querySelector(this._submitButtonSelector);
-    if (form.checkValidity()) {
-      submitButton.removeAttribute("disabled", true);
-      submitButton.classList.remove(this._inactiveButtonClass);
+    if (this._form.checkValidity()) {
+      this.enableSubmitButton();
     } else {
       this._disableSubmitButton();
     }
   }
 
   _disableSubmitButton() {
-    const form = document.querySelector(this._formClass);
-    const submitButton = form.querySelector(this._submitButtonSelector);
-    submitButton.setAttribute("disabled", true);
-    submitButton.classList.add(this._inactiveButtonClass);
+    this._submitButton.setAttribute("disabled", true);
+    this._submitButton.classList.add(this._inactiveButtonClass);
   }
 
   hideInputErrorFirstOpen(evt) {
@@ -96,10 +90,8 @@ export class FormValidator {
     errorElement.textContent = "";
   }
 
-  ableSubmitButton() {
-    const form = document.querySelector(this._formClass);
-    const submitButton = form.querySelector(this._submitButtonSelector);
-    submitButton.removeAttribute("disabled", true);
-    submitButton.classList.remove(this._inactiveButtonClass);
+  enableSubmitButton() {
+    this._submitButton.removeAttribute("disabled", true);
+    this._submitButton.classList.remove(this._inactiveButtonClass);
   }
 }
