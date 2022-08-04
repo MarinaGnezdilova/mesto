@@ -1,7 +1,6 @@
 import { Card } from "./Сard.js";
 import { FormValidator } from "./FormValidator.js";
 const buttonEdit = document.querySelector(".profile__edit-button");
-const buttonClosePopupProfile = document.querySelector(".popup__button-close");
 const contentProfileName = document.querySelector(".profile__form-name");
 const contentProfileJob = document.querySelector(".profile__form-profession");
 const contentPopupFieldName = document.querySelector(".popup__form-field-name");
@@ -13,26 +12,14 @@ const profileFormName = document.querySelector(".profile__form-name");
 const profileFormJob = document.querySelector(".profile__form-profession");
 const blockElements = document.querySelector(".elements");
 const popupNewPlaceContent = document.querySelector(".new-place");
-const popupEditProfile = document.querySelector(".popup-profile");
 const buttonAdd = document.querySelector(".profile__add-button");
-const buttonClosePopupNewPlace = document.querySelector(
-  ".new-place-button-close"
-);
 const fieldPlaceName = document.querySelector(
   ".new-place-form-field-placename"
 );
 const fieldPicture = document.querySelector(".new-place-form-field-picture");
 const formAddPlace = document.querySelector(".new-place-form");
-const buttonClosePopupPicture = document.querySelector(
-  ".popup-picture__button-close"
-);
 const popupProfile = document.querySelector(".popup-profile");
 const popups = document.querySelectorAll(".popup");
-const inputsFormProfile =
-  popupFormEditProfile.querySelectorAll(".popup__form-field");
-const inputsFormNewPlace = Array.from(
-  formAddPlace.querySelectorAll(".popup__form-field")
-);
 const initialCards = [
   {
     name: "Архыз",
@@ -79,25 +66,14 @@ function openPropfilePopup() {
   contentPopupFieldName.value = contentProfileName.textContent;
   contentPopupFielJob.value = contentProfileJob.textContent;
   openPopup(popupProfile);
-  validationProfile.enableSubmitButton();
-  inputsFormProfile.forEach(function (input) {
-    validationProfile.hideInputErrorFirstOpen(input);
-  });
+  validationProfile.resetValidation();
 }
 
 function openNewPlacePopup() {
   fieldPlaceName.value = "";
   fieldPicture.value = "";
   openPopup(popupNewPlaceContent);
-  validationNewPlace.toggleButtonState();
-  inputsFormNewPlace.forEach(function (input) {
-    validationNewPlace.hideInputErrorFirstOpen(input);
-  });
-}
-
-function hideClosestPopup(evt) {
-  const closestPopup = evt.target.closest(".popup");
-  closePopup(closestPopup);
+  validationNewPlace.resetValidation();
 }
 
 function closePopup(closestPopup) {
@@ -115,12 +91,9 @@ function handleProfileFormSubmit(evt) {
 function handleNewPlaceFormSubmit(evt) {
   evt.preventDefault();
   const formAdd = { name: fieldPlaceName.value, link: fieldPicture.value };
-  const newElement = new Card(formAdd, ".element-template");
-  const cardElement = newElement.generateCard();
+  const cardElement = createCard(formAdd);
   blockElements.prepend(cardElement);
   closePopup(popupNewPlaceContent);
-  fieldPlaceName.value = "";
-  fieldPicture.value = "";
 }
 
 function closePopupOnEsc(evt) {
@@ -138,13 +111,6 @@ function createCard(item) {
 
 validationNewPlace.enableValidation();
 validationProfile.enableValidation();
-buttonClosePopupProfile.addEventListener("click", () => {
-  closePopup(popupEditProfile);
-});
-buttonClosePopupPicture.addEventListener("click", hideClosestPopup);
-buttonClosePopupNewPlace.addEventListener("click", () => {
-  closePopup(popupNewPlaceContent);
-});
 buttonEdit.addEventListener("click", function (evt) {
   openPropfilePopup();
 });
@@ -156,9 +122,9 @@ formAddPlace.addEventListener("submit", handleNewPlaceFormSubmit);
 
 popups.forEach(function (popup) {
   popup.addEventListener("click", function (evt) {
-    if (evt.target === evt.currentTarget) {
-      closePopup(evt.target);
-    }
+    if (evt.target === evt.currentTarget || evt.target.classList.contains('popup__button-close')) {
+      closePopup(popup);
+    };
   });
 });
 
