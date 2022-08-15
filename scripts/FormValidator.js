@@ -28,11 +28,10 @@ export class FormValidator {
 
   _validateInput(input) {
     /*this._addCustomErrorMessage(input);*/
-    const errorElement = input.
-      closest(".popup__input-block")
+    const errorElement = input
+      .closest(".popup__input-block")
       .querySelector(`#${input.id}-error`);
     if (!input.validity.valid) {
-
       this._showInputError(input, errorElement);
     } else {
       this._hideInputError(input, errorElement);
@@ -100,9 +99,10 @@ export class FormValidator {
   resetValidation() {
     this.toggleButtonState();
     this._inputs.forEach((input) => {
-      const errorElement = input.closest(".popup__input-block").querySelector(`#${input.id}-error`);
+      const errorElement = input
+        .closest(".popup__input-block")
+        .querySelector(`#${input.id}-error`);
       this._hideInputError(input, errorElement);
     });
-
   }
 }
