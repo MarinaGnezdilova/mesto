@@ -83,15 +83,6 @@ export class FormValidator {
     this._submitButton.classList.add(this._inactiveButtonClass);
   }
 
-  hideInputErrorFirstOpen(evt) {
-    const errorElement = evt
-      .closest(this._inputBlock)
-      .querySelector(`#${evt.id}-error`);
-    evt.classList.remove(this._inputErrorClass);
-    errorElement.classList.remove(this._errorClass);
-    errorElement.textContent = "";
-  }
-
   enableSubmitButton() {
     this._submitButton.removeAttribute("disabled", true);
     this._submitButton.classList.remove(this._inactiveButtonClass);
