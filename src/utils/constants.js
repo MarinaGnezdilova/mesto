@@ -2,9 +2,11 @@ export const blockElements = ".elements";
 export const buttonAdd = document.querySelector(".profile__add-button");
 export const buttonEdit = document.querySelector(".profile__edit-button");
 export const formAddPlace = document.querySelector(".new-place-form");
+export const formAvatar = document.querySelector('.popup-edit-avatar__form');
 export const popupFormEditProfile = document.querySelector(".popup-profile__form");
 export const userNameFieldForm = document.querySelector(".popup__form-field-name");
 export const aboutUserFieldForm = document.querySelector(".popup__form-field-job");
+export const buttonPopupProfile = document.querySelector('.popup-profile__button');
 export const initialCards = [
   {
     name: "Архыз",
