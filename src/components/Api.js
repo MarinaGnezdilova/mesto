@@ -4,41 +4,38 @@ export class Api {
     this._authorization = authorization;
     this._renderTextButton = renderTextButton;
   }
+ _checkResponce(res) {
+    if (res.ok) {
+        const data = res.json();
+        return data;
+        }
+      return Promise.reject(`Ошибка: ${res.status}`);
+}
+
 
   deleteCard(idCard) {
-    const res = fetch(`${this._baseUrl}${idCard}`, {
+    return fetch(`${this._baseUrl}/${idCard}`, {
       method: "DELETE",
       headers: {
         authorization: this._authorization,
       },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    });
+    })
+    .then(() => {
+        this._checkResponce}
+        )
   }
 
-  async getCards() {
-    try {
-      const res = await fetch(`${this._baseUrl}`, {
-        headers: {
-          authorization: this._authorization,
-        },
-      });
-      if (res.ok) {
-        const data = await res.json();
-        return data;
+    getCards() {
+    return fetch(`${this._baseUrl}`, {
+            headers: {
+              authorization: this._authorization,
+            },
+          }).then(this._checkResponce)
       }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    }
-    catch (e) {
-        alert("Не удалось получить карточки");
-      }
-  }
+
 
   editProfile(formData) {
-    fetch(`https://mesto.nomoreparties.co/v1/cohort-49/users/me`,
+    return fetch(`https://mesto.nomoreparties.co/v1/cohort-49/users/me`,
         {
           method: "PATCH",
           headers: {
@@ -51,24 +48,13 @@ export class Api {
           }),
         }
       )
-      .then ((res) => {
-        if (res.ok) {
-            const data = res.json();
-            return data;
-          }
-          return Promise.reject(`Ошибка: ${res.status}`);
-      })
-      .catch((err) => {
-        renderError(`Ошибка: ${err}`);
-      })
-      .finally(() => {
-        this._renderTextButton(false, '.popup-profile__button');
-      });
+      .then(this._checkResponce)
+
   }
 
-  async deleteLike(idCard, card) {
-    try {
-      const res = await fetch(
+
+  deleteLike(idCard) {
+    return fetch(
         `https://mesto.nomoreparties.co/v1/cohort-49/cards/${idCard}/likes`,
         {
           method: "DELETE",
@@ -76,21 +62,11 @@ export class Api {
             authorization: "90f8d9a0-3583-4d46-8126-1c35c51fd02a",
           },
         }
-      );
-      if (res.ok) {
-        const data = await res.json();
-        return data;
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    }
-    catch (e) {
-      alert("Не удалось удалить лайк");
-    }
+      ).then(this._checkResponce)
   }
 
-  async setLike(idCard, card) {
-    try {
-      const res = await fetch(
+  setLike(idCard) {
+    return fetch(
         `https://mesto.nomoreparties.co/v1/cohort-49/cards/${idCard}/likes`,
         {
           method: "PUT",
@@ -98,49 +74,32 @@ export class Api {
             authorization: "90f8d9a0-3583-4d46-8126-1c35c51fd02a",
           },
         }
-      );
-      if (res.ok) {
-        const data = await res.json();
-        return data;
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    }
-      catch (e) {
-      alert("Не удалось отправить лайк");
-    }
-  }
+      )
+      .then(this._checkResponce)
+       }
 
-  async addCard(formData) {
-    try{
 
-const res = await fetch(
-    "https://mesto.nomoreparties.co/v1/cohort-49/cards",
-    {
-      method: "POST",
-      headers: {
-        authorization: "90f8d9a0-3583-4d46-8126-1c35c51fd02a",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: formData.name,
-        link: formData.link,
-      }),
-    }
-  );
-  if (res.ok) {
-    const data = await res.json();
-    return data;
-  }
-  return Promise.reject(`Ошибка: ${res.status}`);
-}
-catch(e) {
-    alert("Не удалось добавить карточку");
-}
+addCard(formData) {
+    return fetch(
+        "https://mesto.nomoreparties.co/v1/cohort-49/cards",
+        {
+          method: "POST",
+          headers: {
+            authorization: "90f8d9a0-3583-4d46-8126-1c35c51fd02a",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            link: formData.link,
+          }),
+        }
+      )
+      .then(this._checkResponce)
+
 }
 
-  async changeAvatar(avatar) {
-    try {
-      const res = await fetch(
+changeAvatar(avatar) {
+    return fetch(
         "https://mesto.nomoreparties.co/v1/cohort-49/users/me/avatar",
         {
           method: "PATCH",
@@ -152,34 +111,17 @@ catch(e) {
             avatar: avatar.link,
           }),
         }
-      );
-      if (res.ok) {
-        const data = await res.json();
-        return data;
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    }
-    catch (e) {
-      alert("Не удалось отредактировать аватар");
-    }
-  }
+      )
+      .then(this._checkResponce)
+}
 
-
-  async getInfoUser() {
-    try {
-      const res = await fetch("https://nomoreparties.co/v1/cohort-49/users/me", {
+  getInfoUser() {
+    return fetch("https://nomoreparties.co/v1/cohort-49/users/me", {
         headers: {
           authorization: "90f8d9a0-3583-4d46-8126-1c35c51fd02a",
         },
-      });
-      if (res.ok) {
-        const data = await res.json();
-        return data;
-      }
-      return Promise.reject(`Ошибка: ${res.status}`);
-    }
-      catch {
-      alert("Не удалось загрузить данные пользователя");
-    }
-  }
+      })
+  .then(this._checkResponce)
+}
+
 }

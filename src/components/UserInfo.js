@@ -15,11 +15,19 @@ export class UserInfo {
   }
   setUserInfo(data) {
     this._name.textContent = data.name;
-    this._aboutUser.textContent = data.aboutUser;
+    this._aboutUser.textContent = data.about;
   }
 
   setUserInfoOnPage(data) {
     this._aboutUser.textContent = data.about;
     this._nameOnPage.textContent = data.name;
-  }
+    this._avatar.src = data.avatar;
+
+}
+
+/*getID(data) {
+  const id = data._id;
+  return id;
+}*/
+
 }
