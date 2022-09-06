@@ -10,7 +10,6 @@ export class PopupWithConfirmation extends Popup {
 
   setEventListener() {
     super.setEventListener();
-    console.log(this.id);
     this._buttonСonfirmation.addEventListener("click", () => {
       this._handleDelete(this.id, this.card);
     });

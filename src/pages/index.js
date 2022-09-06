@@ -1,4 +1,4 @@
-import "../pages/index.css";
+/*import "../pages/index.css";*/
 import {
   blockElements,
   formAddPlace,
@@ -67,14 +67,12 @@ const popupEditAvatar = new PopupWithForm({
   handleFormSumbit: (avatar) => {
     renderTextButton(true, '.popup-edit-avatar__button');
     api.changeAvatar(avatar).then((res) => {
-      const profileAvatar = document.querySelector(".profile__avatar");
-      profileAvatar.src = res.avatar;
+      userInfo.setAvatar(res);
       popupEditAvatar.close();
     })
     .catch((e) => {
       alert("Не удалось изменить аватар");
     })
-    .fi
     .finally(() => {
       renderTextButton(false, '.popup-edit-avatar__button');
     });

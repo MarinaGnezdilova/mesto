@@ -22,12 +22,9 @@ export class UserInfo {
     this._aboutUser.textContent = data.about;
     this._nameOnPage.textContent = data.name;
     this._avatar.src = data.avatar;
+  }
 
-}
-
-/*getID(data) {
-  const id = data._id;
-  return id;
-}*/
-
+  setAvatar(data) {
+    this._avatar.src = data.avatar;
+  }
 }
